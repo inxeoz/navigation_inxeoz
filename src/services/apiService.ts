@@ -25,7 +25,7 @@ interface ApiResponse {
 }
 
 export class ApiService {
-  private static readonly API_URL = 'https://nav.inxeoz.com/links'
+  private static readonly API_URL = 'https://nav.api.inxeoz.com/links'
   private static cache: NavigationLink[] | null = null
   private static lastFetch: number = 0
   private static readonly CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
