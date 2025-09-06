@@ -8,10 +8,10 @@
   let className: string = ''
   export { className as class }
 
-  const { activeTab } = getContext('tabs')
+  const { activeTab, setValue } = getContext('tabs')
 
   const handleClick = () => {
-    activeTab.set(value)
+    setValue(value)
   }
 </script>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { setContext } from 'svelte'
+  import { setContext, createEventDispatcher } from 'svelte'
   import { writable } from 'svelte/store'
   import { cn } from '$lib/utils'
 
@@ -8,8 +8,17 @@
   let className: string = ''
   export { className as class }
 
+  const dispatch = createEventDispatcher()
   const activeTab = writable(value)
-  setContext('tabs', { activeTab })
+  
+  setContext('tabs', { 
+    activeTab,
+    setValue: (newValue: string) => {
+      activeTab.set(newValue)
+      value = newValue
+      dispatch('change', newValue)
+    }
+  })
 
   $: activeTab.set(value)
 </script>

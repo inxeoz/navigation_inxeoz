@@ -38,7 +38,7 @@
   const filteredLinks = derived(
     [searchTerm, activeCategory, links],
     ([$searchTerm, $activeCategory, $links]) => {
-      return $links.filter(link => {
+      const filtered = $links.filter(link => {
         const matchesSearch = $searchTerm === '' || 
           link.title.toLowerCase().includes($searchTerm.toLowerCase()) ||
           link.description.toLowerCase().includes($searchTerm.toLowerCase()) ||
@@ -48,6 +48,17 @@
 
         return matchesSearch && matchesCategory
       })
+      
+      // Debug logging for development
+      if (import.meta.env.DEV) {
+        console.log(`🔍 Filtering: category="${$activeCategory}", search="${$searchTerm}"`)
+        console.log(`📊 Filtered results: ${filtered.length}/${$links.length} links`)
+        if ($activeCategory !== 'all') {
+          console.log(`📂 Category matches:`, filtered.map(l => l.title))
+        }
+      }
+      
+      return filtered
     }
   )
 
@@ -67,6 +78,13 @@
       'Inxeoz Bucket': 'Bucket',
     }
     return mobileNames[cat] || (cat.length > 8 ? cat.substring(0, 6) + '...' : cat)
+  }
+
+  // Debug logging for category changes
+  if (import.meta.env.DEV) {
+    activeCategory.subscribe(value => {
+      console.log(`🏷️ Active category changed to: "${value}"`)
+    })
   }
 </script>
 
@@ -165,7 +183,7 @@
       {/if}
 
       <!-- Category Tabs -->
-        <Tabs bind:value={$activeCategory} class="w-full">
+        <Tabs value={$activeCategory} on:change={(e) => activeCategory.set(e.detail)} class="w-full">
           <div class="mb-6 sm:mb-8">
             <TabsList class="w-full h-auto p-1 flex flex-wrap justify-center gap-1 sm:gap-2">
               <TabsTrigger 
@@ -189,8 +207,8 @@
             </TabsList>
           </div>
 
-          <TabsContent value={$activeCategory} class="mt-0">
-            <!-- Links Grid -->
+          <!-- Links Grid -->
+          <div class="mt-0">
             {#if $filteredLinks.length > 0}
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-6">
                 {#each $filteredLinks as link, index}
@@ -211,7 +229,7 @@
                 <p class="text-muted-foreground text-sm sm:text-base">Try adjusting your search or category filter</p>
               </div>
             {/if}
-          </TabsContent>
+          </div>
         </Tabs>
     </main>
 
