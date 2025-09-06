@@ -51,6 +51,15 @@ export const staticNavigationData: NavigationLink[] = [
     imageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
     tags: ["search", "google", "engine", "web"]
   },
+
+    {
+    title: "TEST Google Search",
+    description: "World's most popular search engine",
+    url: "https://www.google.com/",
+    category: "Common Online Services",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
+    tags: ["search", "google", "engine", "web"]
+  },
   {
     title: "Wikipedia",
     description: "Free online encyclopedia with millions of articles",
