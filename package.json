@@ -1,0 +1,31 @@
+
+{
+    "name": "Navigation Page with Themes",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "dependencies": {
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "lucide-svelte": "^0.446.0",
+        "tailwind-merge": "^2.2.0",
+        "svelte": "^4.2.19"
+    },
+    "devDependencies": {
+        "@sveltejs/vite-plugin-svelte": "^3.1.1",
+        "@types/node": "^20.10.0",
+        "autoprefixer": "^10.4.20",
+        "postcss": "^8.4.47",
+        "svelte-check": "^3.8.6",
+        "tailwindcss": "^3.4.13",
+        "typescript": "^5.7.2",
+        "vite": "^5.4.10"
+    },
+    "scripts": {
+        "dev": "vite dev",
+        "build": "vite build",
+        "preview": "vite preview",
+        "check": "svelte-check --tsconfig ./tsconfig.json",
+        "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
+    }
+}
